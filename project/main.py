@@ -74,7 +74,6 @@ async def pages(callback: types.CallbackQuery):
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
 
 
-
-
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+
