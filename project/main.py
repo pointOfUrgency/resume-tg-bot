@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Tok import Token
-
+import os.path
 
 bot = Bot(Token)
 dp = Dispatcher(bot)
@@ -17,11 +17,6 @@ b4 = InlineKeyboardButton("Связаться со мной",
                           callback_data='connect')
 ikb.add(b1, b2, b3, b4)
 
-photo1 = types.input_file.InputFile('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_2_2023-08-24_12-34-04.jpg')
-# photo2 = types.input_file.InputFile('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_1_2023-08-24_12-34-04.jpg')
-# photo3 = types.input_file.InputFile('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_3_2023-08-24_12-34-04.jpg')
-# photo4 = types.input_file.InputFile('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_4_2023-08-24_12-34-04.jpg')
-
 
 ABOUT_ME = '''
 Мне очень интересно создавать функциональные, безопасные и интуитивно понятные веб-приложения. Однако моя страсть не ограничивается только программированием. Я также увлекаюсь психологией и медициной. Я считаю, что понимание, как люди мыслят и чувствуют, помогает мне создавать более интуитивные и пользовательские приложения. Комбинируя свои знания об информационной безопасности и психологии, я стремлюсь создавать безопасные приложения, которые не только эффективно решают задачи, но и обеспечивают удовлетворение пользователей.
@@ -36,8 +31,14 @@ STACK = '''
 
 @dp.message_handler(commands=['start', 'на_главную'])
 async def hello(message: types.Message):
+    
+    relative_path = 'photos\photo_2_2023-08-24_12-34-04.jpg'
+    current_dir = os.path.dirname(__file__)
+    absolute_path = os.path.join(current_dir, relative_path)
+
+    photo = open(absolute_path, "rb")
     await bot.send_photo(chat_id=message.chat.id, 
-                         photo=open('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_2_2023-08-24_12-34-04.jpg', "rb"),
+                         photo=photo,
                          caption='Привет! Меня зовут Артур Гунько, и я начинающий разработчик и студент направления информационной безопасности.',
                          reply_markup=ikb)
     await message.delete()
@@ -58,15 +59,27 @@ async def pages(callback: types.CallbackQuery):
         InlineKeyboardButton("Telegram", url='https://t.me/UrgUrgFuckedSociety')
     )
     if callback.data == 'me':
-        await callback.message.answer_photo(open('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_1_2023-08-24_12-34-04.jpg', "rb"), caption=ABOUT_ME)
+        relative_path = 'photos\photo_1_2023-08-24_12-34-04.jpg'
+        current_dir = os.path.dirname(__file__)
+        absolute_path = os.path.join(current_dir, relative_path)
+
+        await callback.message.answer_photo(open(absolute_path, "rb"), caption=ABOUT_ME)
         await callback.message.delete()
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
     elif callback.data == 'work':
-        await callback.message.answer_photo(open('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_3_2023-08-24_12-34-04.jpg', "rb"), caption=WHY)
+        relative_path = 'photos\photo_3_2023-08-24_12-34-04.jpg'
+        current_dir = os.path.dirname(__file__)
+        absolute_path = os.path.join(current_dir, relative_path)
+
+        await callback.message.answer_photo(open(absolute_path, "rb"), caption=WHY)
         await callback.message.delete()
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
     elif callback.data == 'stack':
-        await callback.message.answer_photo(open('D:\Python learning\Tg-bot-ArthurGunko\photos\photo_4_2023-08-24_12-34-04.jpg', "rb"), caption=STACK)
+        relative_path = 'photos\photo_4_2023-08-24_12-34-04.jpg'
+        current_dir = os.path.dirname(__file__)
+        absolute_path = os.path.join(current_dir, relative_path)
+
+        await callback.message.answer_photo(open(absolute_path, "rb"), caption=STACK)
         await callback.message.delete()
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
     elif callback.data == 'connect':
