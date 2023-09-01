@@ -32,7 +32,7 @@ STACK = '''
 @dp.message_handler(commands=['start', 'на_главную'])
 async def hello(message: types.Message):
     
-    relative_path = 'photos\photo_2_2023-08-24_12-34-04.jpg'
+    relative_path = 'photos/photo_2_2023-08-24_12-34-04.jpg'
     current_dir = os.path.dirname(__file__)
     absolute_path = os.path.join(current_dir, relative_path)
 
@@ -59,7 +59,7 @@ async def pages(callback: types.CallbackQuery):
         InlineKeyboardButton("Telegram", url='https://t.me/UrgUrgFuckedSociety')
     )
     if callback.data == 'me':
-        relative_path = 'photos\photo_1_2023-08-24_12-34-04.jpg'
+        relative_path = 'photos/photo_1_2023-08-24_12-34-04.jpg'
         current_dir = os.path.dirname(__file__)
         absolute_path = os.path.join(current_dir, relative_path)
 
@@ -67,7 +67,7 @@ async def pages(callback: types.CallbackQuery):
         await callback.message.delete()
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
     elif callback.data == 'work':
-        relative_path = 'photos\photo_3_2023-08-24_12-34-04.jpg'
+        relative_path = 'photos/photo_3_2023-08-24_12-34-04.jpg'
         current_dir = os.path.dirname(__file__)
         absolute_path = os.path.join(current_dir, relative_path)
 
@@ -75,7 +75,7 @@ async def pages(callback: types.CallbackQuery):
         await callback.message.delete()
         await callback.message.answer('Вернуться назад?', reply_markup=keyboard)
     elif callback.data == 'stack':
-        relative_path = 'photos\photo_4_2023-08-24_12-34-04.jpg'
+        relative_path = 'photos/photo_4_2023-08-24_12-34-04.jpg'
         current_dir = os.path.dirname(__file__)
         absolute_path = os.path.join(current_dir, relative_path)
 
